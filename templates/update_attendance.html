@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        form {
+            width: 50%;
+            margin: 0 auto;
+        }
+
+        div {
+            margin-bottom: 10px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        select,
+        input[type="date"],
+        input[type="time"] {
+            width: calc(100% - 10px);
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Attendance</title>
+</head>
+
+<body>
+    <h2>Update Attendance</h2>
+    <form method="POST">
+        <div>
+            <label for="employee">Employee:</label>
+            <select id="employee" name="employee">
+                {% for employee in employees %}
+                <option value="{{ employee.empid }}">{{ employee.empname }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>
+            <label for="punchtime">Punch Time:</label>
+            <select id="punchtime" name="punchtime">
+                <option value="entryTime">Entry Time</option>
+                <option value="exitTime">Exit Time</option>
+            </select>
+        </div>
+        <div>
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date" value="{{ today }}">
+        </div>
+        <div>
+            <label for="Time">Time:</label>
+            <input type="time" id="Time" name="Time" value="{{ current_time }}">
+        </div>
+        <div>
+            <input type="submit" value="Update Attendance">
+        </div>
+    </form>
+</body>
+
+</html>

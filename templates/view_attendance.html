@@ -1,0 +1,22 @@
+<!-- select_employee.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Employee</title>
+</head>
+<body>
+    <h1>Select Employee</h1>
+    <form method="post" action="{{ url_for('view_attendance') }}">
+        <label for="employee_name">Select Employee:</label>
+        <select name="employee_name" id="employee_name">
+            {% for employee in employees %}
+            <option value="{{ employee[0] }}">{{ employee[0] }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <input type="submit" value="View Attendance">
+    </form>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Head content -->
+</head>
+<body>
+    <!-- Employee list -->
+    <h2>Employee List</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Role</th>
+                <th>Employee Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for employee in employees %}
+            <tr>
+                <td>{{ employee[1] }}</td>  <!-- Username -->
+                <td>{{ employee[3] }}</td>  <!-- Role -->
+                <td>{{ employee[4] }}</td>  <!-- Employee Name -->
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

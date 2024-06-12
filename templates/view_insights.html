@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Head content -->
+</head>
+<body>
+    <!-- Insights page content -->
+    <h2>Insights</h2>
+    <div>
+        <label for="employee-select">Select Employee:</label>
+        <select id="employee-select">
+            {% for employee in employees %}
+            <option value="{{ employee[0] }}">{{ employee[1] }}</option>
+            {% endfor %}
+        </select>
+        <button id="generate-graphs-btn">Generate Graphs</button>
+    </div>
+    <div>
+        <h3>Weekly Work Done</h3>
+        <canvas id="weekly-chart"></canvas>
+    </div>
+    <div>
+        <h3>Monthly Work Done</h3>
+        <canvas id="monthly-chart"></canvas>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <script>
+        document.getElementById('generate-graphs-btn').addEventListener('click', function() {
+            var employeeId = document.getElementById('employee-select').value;
+            fetch('/admin/insights_data', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                body: 'employee_id=' + employeeId
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Generate graphs using Chart.js
+                // Example:
+                var weeklyChart = new Chart(document.getElementById('weekly-chart').getContext('2d'), {
+                    type: 'line',
+                    data: {
+                        labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+                        datasets: [{
+                            label: 'Weekly Work Done',
+                            data: data.weekly_data
+                        }]
+                    }
+                });
+                var monthlyChart = new Chart(document.getElementById('monthly-chart').getContext('2d'), {
+                    type: 'bar',
+                    data: {
+                        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                        datasets: [{
+                            label: 'Monthly Work Done',
+                            data: data.monthly_data
+                        }]
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

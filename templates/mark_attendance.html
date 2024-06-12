@@ -1,0 +1,28 @@
+# mark_attendance.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mark Attendance</title>
+</head>
+<body>
+    <h1>Mark Attendance</h1>
+    <form method="post">
+        <label for="employee">Select Employee:</label>
+        <select name="employee_id" id="employee">
+            {% for employee in employees %}
+            <option value="{{ employee[0] }}">{{ employee[1] }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label for="punch_in_time">Punch-In Time:</label>
+        <input type="datetime-local" id="punch_in_time" name="punch_in_time" required>
+        <br>
+        <label for="punch_out_time">Punch-Out Time:</label>
+        <input type="datetime-local" id="punch_out_time" name="punch_out_time" required>
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
